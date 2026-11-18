@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panduan Haji &amp; Umrah</title>
+<style>
+  :root{
+    --bg:#f4f7f4;
+    --card:#ffffff;
+    --ink:#2e3d33;
+    --muted:#6b7d70;
+    --accent:#4f8a6d;
+    --accent-soft:#e3efe8;
+    --sand:#e8dcc8;
+    --sand-deep:#c9b48e;
+    --line:#dde7df;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  header{
+    background:linear-gradient(135deg,#4f8a6d,#6aa884);
+    color:#fff;
+    padding:2.2rem 1rem 2rem;
+    text-align:center;
+  }
+  header h1{font-size:1.7rem;font-weight:600;letter-spacing:.5px}
+  header p{opacity:.92;margin-top:.3rem;font-size:.95rem}
+  main{
+    max-width:860px;
+    margin:0 auto;
+    padding:1.2rem 1rem 3rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.4rem;
+  }
+  section{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:1.4rem 1.4rem 1.6rem;
+    box-shadow:0 2px 8px rgba(46,61,51,.05);
+  }
+  .sec-tag{
+    display:inline-block;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:.72rem;
+    font-weight:600;
+    padding:.15rem .6rem;
+    border-radius:999px;
+    letter-spacing:.5px;
+  }
+  section h2{font-size:1.25rem;margin:.5rem 0 .2rem;color:#26513c}
+  .sec-desc{color:var(--muted);font-size:.92rem;margin-bottom:1.1rem}
+
+  /* ---------- Section 1 : Langkah ---------- */
+  .steps{display:flex;flex-direction:column;gap:.55rem}
+  .step{
+    display:flex;align-items:center;gap:.8rem;
+    padding:.75rem .9rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    cursor:pointer;
+    transition:background .15s,border-color .15s;
+    background:#fbfdfb;
+  }
+  .step:hover{background:var(--accent-soft)}
+  .step.active{border-color:var(--accent);background:var(--accent-soft)}
+  .step-num{
+    flex:0 0 32px;height:32px;border-radius:50%;
+    background:var(--sand);color:#7a6a45;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:.9rem;
+  }
+  .step.active .step-num{background:var(--accent);color:#fff}
+  .step-title{font-weight:600;font-size:.98rem}
+  .step-sub{font-size:.82rem;color:var(--muted)}
+  .step-detail{
+    display:none;
+    margin-top:.9rem;
+    padding:1rem 1.1rem;
+    background:#f6faf7;
+    border-left:4px solid var(--accent);
+    border-radius:0 10px 10px 0;
+  }
+  .step-detail.show{display:block;animation:fadein .25s ease}
+  .step-detail h3{font-size:1rem;color:#26513c;margin-bottom:.35rem}
+  .step-detail .latihan{
+    margin-top:.6rem;font-size:.85rem;color:#7a6a45;
+    background:var(--sand);border-radius:8px;padding:.5rem .7rem;
+  }
+  @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* ---------- Section 2 : Doa & checklist ---------- */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr}}
+  .panel h3{font-size:1rem;color:#26513c;margin-bottom:.6rem}
+  .doa-list{display:flex;flex-direction:column;gap:.45rem}
+  .doa-item{
+    padding:.6rem .8rem;border:1px solid var(--line);border-radius:10px;
+    cursor:pointer;background:#fbfdfb;font-size:.92rem;transition:background .15s;
+  }
+  .doa-item:hover{background:var(--accent-soft)}
+  .doa-item.active{border-color:var(--accent);background:var(--accent-soft);font-weight:600}
+  .doa-box{
+    margin-top:.7rem;padding:.9rem 1rem;
+    background:#f2f7f3;border-radius:10px;border:1px dashed var(--accent);
+    font-size:.9rem;
+  }
+  .doa-box .arab{font-size:1.05rem;direction:rtl;text-align:right;margin-bottom:.3rem;color:#26513c}
+  .doa-box .maksud{color:var(--muted);font-style:italic}
+  .check-list{display:flex;flex-direction:column;gap:.45rem}
+  .check-item{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.55rem .8rem;border:1px solid var(--line);border-radius:10px;
+    cursor:pointer;background:#fbfdfb;transition:background .15s;
+    font-size:.92rem;user-select:none;
+  }
+  .check-item:hover{background:var(--accent-soft)}
+  .check-item input{accent-color:var(--accent);width:17px;height:17px;cursor:pointer}
+  .check-item.done{background:var(--accent-soft);border-color:var(--accent)}
+  .check-item.done .check-name{text-decoration:line-through;color:var(--muted)}
+  .check-status{
+    margin-left:auto;font-size:.72rem;font-weight:600;
+    padding:.12rem .55rem;border-radius:999px;
+    background:var(--sand);color:#7a6a45;
+  }
+  .check-item.done .check-status{background:var(--accent);color:#fff}
+  .progress-bar{
+    height:8px;background:var(--line);border-radius:999px;margin:.4rem 0 1rem;overflow:hidden;
+  }
+  .progress-fill{height:100%;background:var(--accent);width:0;transition:width .3s}
+  .progress-label{font-size:.8rem;color:var(--muted);text-align:right}
+  .tier-labels{display:flex;gap:.5rem;margin-top:.9rem;flex-wrap:wrap}
+  .tier{
+    font-size:.72rem;font-weight:600;padding:.25rem .7rem;border-radius:999px;
+  }
+  .tier.free{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+  .tier.premium{background:var(--sand);color:#7a6a45;border:1px dashed var(--sand-deep)}
+
+  /* ---------- Add / edit forms ---------- */
+  .add-form{
+    margin-top:1rem;padding:.9rem;
+    background:#f6faf7;border:1px solid var(--line);border-radius:10px;
+  }
+  .add-form h4{font-size:.88rem;color:#26513c;margin-bottom:.5rem}
+  .add-form input{
+    width:100%;padding:.5rem .7rem;margin-bottom:.45rem;
+    border:1px solid var(--line);border-radius:8px;font-size:.88rem;
+    font-family:inherit;background:#fff;color:var(--ink);
+  }
+  .add-form input:focus{outline:none;border-color:var(--accent)}
+  .add-form .arab-input{direction:rtl;text-align:right}
+  .add-row{display:flex;gap:.45rem}
+  .add-row input{margin-bottom:0;flex:1}  .item-actions{margin-left:.35rem;display:flex;gap:.3rem}
+  .icon-btn{
+    border:none;background:none;cursor:pointer;font-size:.85rem;
+    padding:.1rem .25rem;border-radius:6px;opacity:.65;
+  }
+  .icon-btn:hover{opacity:1;background:rgba(79,138,109,.15)}
+  .edit-input{
+    flex:1;padding:.15rem .4rem;border:1px solid var(--accent);border-radius:6px;
+    font-size:.88rem;font-family:inherit;background:#fff;color:var(--ink);
+  }
+
+  /* ---------- Doa attachments ---------- */
+  .doa-attach{
+    margin-top:.5rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  }
+  .attach-btn{
+    font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;
+    border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;
+  }
+  .attach-btn:hover{background:var(--accent-soft)}
+  .attach-file{
+    font-size:.72rem;color:var(--accent);background:var(--accent-soft);
+    border-radius:999px;padding:.18rem .55rem;cursor:pointer;
+  }
+  .attach-remove{border:none;background:none;color:#a05a5a;cursor:pointer;font-size:.72rem;padding:.1rem}
+  .attached-preview{
+    margin-top:.6rem;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;
+  }
+  .attached-preview img{max-width:100%;display:block}
+  .attached-preview iframe{
+    width:100%;height:320px;border:none;display:block;background:#f4f4f4;
+  }
+  .attached-preview .pdf-fallback{padding:.8rem;font-size:.85rem}
+
+  /* ---------- Section 4 : Gambar Rujukan ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
+  .gallery-item{
+    border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fbfdfb;
+    position:relative;
+  }
+  .gallery-item img{width:100%;height:130px;object-fit:cover;display:block}
+  .gallery-cap{padding:.5rem .6rem;font-size:.82rem}
+  .gallery-cap strong{display:block;font-size:.86rem;color:#26513c}
+  .gallery-cap span{color:var(--muted);font-size:.78rem}
+  .gallery-del{
+    position:absolute;top:6px;right:6px;border:none;border-radius:50%;
+    width:24px;height:24px;background:rgba(255,255,255,.92);color:#a05a5a;
+    cursor:pointer;font-size:.8rem;box-shadow:0 1px 4px rgba(0,0,0,.2);
+  }
+  .gallery-empty{
+    grid-column:1/-1;padding:1rem;text-align:center;color:var(--muted);
+    font-size:.85rem;background:#f6faf7;border:1px dashed var(--line);border-radius:10px;
+  }
+  input[type="file"]{display:none}
+
+  /* ---------- Section 3 : Simulasi ---------- */
+  .sim-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+  .sim-tab{
+    padding:.45rem .95rem;border-radius:999px;border:1px solid var(--line);
+    background:#fbfdfb;cursor:pointer;font-size:.88rem;font-weight:600;
+    color:var(--muted);transition:all .15s;
+  }
+  .sim-tab:hover{background:var(--accent-soft)}
+  .sim-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .sim-stage-wrap{display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start}
+  @media(max-width:640px){.sim-stage-wrap{grid-template-columns:1fr}}
+  .sim-stage{
+    width:280px;height:280px;
+    background:#f2f7f3;border:1px solid var(--line);border-radius:12px;
+    position:relative;overflow:hidden;margin:0 auto;
+  }
+  .kaabah{
+    position:absolute;width:44px;height:44px;top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    background:#26323a;border-radius:4px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--sand-deep);font-size:1.1rem;font-weight:700;
+    box-shadow:0 3px 10px rgba(0,0,0,.25);
+  }
+  .path-line{position:absolute;border:2px dashed var(--sand-deep);opacity:.7}
+  .path-circle{border-radius:50%}
+  .path-straight{border-radius:8px}
+  .user-dot{
+    position:absolute;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);border:3px solid #fff;
+    box-shadow:0 2px 8px rgba(79,138,109,.5);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:.7rem;
+    transition:left 1s ease-in-out,top 1s ease-in-out;
+    left:127px;top:127px;z-index:3;
+  }
+  .sim-info h3{font-size:1rem;color:#26513c;margin-bottom:.3rem}
+  .sim-info p{font-size:.88rem;color:var(--muted);margin-bottom:1rem}
+  .sim-controls{display:flex;gap:.6rem;flex-wrap:wrap}
+  button.btn{
+    padding:.55rem 1.2rem;border:none;border-radius:10px;
+    font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .15s;
+  }
+  .btn-main{background:var(--accent);color:#fff}
+  .btn-main:hover{opacity:.88}
+  .btn-main:disabled{opacity:.5;cursor:not-allowed}
+  .btn-reset{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent)}
+  .btn-reset:hover{opacity:.85}
+  .sim-status{
+    margin-top:.9rem;font-size:.85rem;color:#7a6a45;
+    background:var(--sand);border-radius:10px;padding:.55rem .8rem;
+    min-height:2.2rem;
+  }
+  .wukuf-area{
+    position:absolute;top:18px;left:18px;right:18px;bottom:18px;
+    border:2px dashed var(--sand-deep);border-radius:12px;opacity:.7;
+    display:flex;align-items:flex-start;justify-content:center;
+    color:var(--sand-deep);font-size:.75rem;font-weight:600;padding-top:8px;
+  }
+  .jamrah{
+    position:absolute;width:22px;height:22px;border-radius:50%;
+    background:#8a9a8f;color:#fff;font-size:.55rem;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  footer{
+    text-align:center;color:var(--muted);font-size:.8rem;padding:0 1rem 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🕋 Panduan Haji &amp; Umrah</h1>
+  <p>Belajar langkah asas, semak checklist, dan latihan simulasi — semua dalam satu halaman</p>
+</header>
+
+<main>
+
+  <!-- ============ SECTION 1: PANDUAN LANGKAH ============ -->
+  <section id="panduan">
+    <span class="sec-tag">SEKSYEN 1</span>
+    <h2>Panduan Langkah</h2>
+    <p class="sec-desc">Urutan asas ibadah haji dan umrah. Klik satu langkah untuk lihat penerangan ringkas di bawah senarai.</p>
+
+    <div class="steps" id="stepsList"></div>
+
+    <div class="step-detail" id="stepDetail">
+      <h3 id="detailTitle"></h3>
+      <p id="detailBody"></p>
+      <div class="latihan" id="detailLatihan"></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: DOA & CHECKLIST ============ -->
+  <section id="checklist">
+    <span class="sec-tag">SEKSYEN 2</span>
+    <h2>Doa &amp; Checklist</h2>
+    <p class="sec-desc">Bersedia sebelum bertolak. Pilih doa untuk lihat maksudnya, dan tandakan barang penting yang sudah siap.</p>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3>🤲 Doa Pilihan</h3>
+        <div class="doa-list" id="doaList"></div>
+        <div class="doa-box" id="doaBox"></div>
+        <div class="add-form" id="attachForm">
+          <h4>📎 Fail Rujukan Doa (PDF / PNG)</h4>
+          <p class="sec-desc" style="margin-bottom:.5rem">Pilih doa dalam senarai atas, kemudian muat naik fail rujukan untuk doa itu. Paparan hanya semasa halaman dibuka.</p>
+          <div class="doa-attach">
+            <button class="attach-btn" id="btnAttachDoa">⬆️ Muat Naik PDF / PNG</button>
+            <input type="file" id="doaFileInput" accept=".pdf,.png,image/png,application/pdf">
+            <span id="attachTarget" style="font-size:.78rem;color:var(--muted)"></span>
+          </div>
+          <div id="attachPreviewArea"></div>
+        </div>
+        <div class="add-form">
+          <h4>➕ Tambah Doa Sendiri</h4>
+          <input type="text" id="doaNama" placeholder="Nama doa (cth: Doa Masuk Masjid)">
+          <input type="text" id="doaArab" class="arab-input" dir="rtl" placeholder="Teks doa (pilihan)">
+          <input type="text" id="doaMaksud" placeholder="Maksud ringkas (pilihan)">
+          <button class="btn btn-main" id="btnAddDoa">Tambah Doa</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>🧳 Barang Penting</h3>
+        <div class="progress-label" id="progressLabel">0 / 6 siap</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="check-list" id="checkList"></div>
+        <div class="add-form">
+          <h4>✏️ Tambah / Urus Barang</h4>
+          <div class="add-row">
+            <input type="text" id="newItemName" placeholder="Nama barang baru (cth: Bekas air zamzam 5L)">
+            <button class="btn btn-main" id="btnAddItem">Tambah</button>
+          </div>
+        </div>
+        <div class="tier-labels">
+          <span class="tier free">PERCUMA — Panduan asas &amp; checklist</span>
+          <span class="tier premium">PREMIUM — Contoh visual sahaja, tiada bayaran sebenar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: SIMULASI PRACTICE ============ -->
+  <section id="simulasi">
+    <span class="sec-tag">SEKSYEN 3</span>
+    <h2>Simulasi Practice</h2>
+    <p class="sec-desc">Latihan interaktif ringkas. Pilih ibadah, kemudian tekan butang "Bergerak" untuk ikut laluan simulasi.</p>
+
+    <div class="sim-tabs" id="simTabs">
+      <button class="sim-tab active" data-sim="tawaf">Tawaf</button>
+      <button class="sim-tab" data-sim="saie">Saie</button>
+      <button class="sim-tab" data-sim="wukuf">Wukuf</button>
+      <button class="sim-tab" data-sim="jamrah">Melontar Jamrah</button>
+    </div>
+
+    <div class="sim-stage-wrap">
+      <div class="sim-stage" id="simStage"></div>
+      <div class="sim-info">
+        <h3 id="simTitle"></h3>
+        <p id="simDesc"></p>
+        <div class="sim-controls">
+          <button class="btn btn-main" id="btnMove">Bergerak ▶</button>
+          <button class="btn btn-reset" id="btnReset">Set Semula ↺</button>
+        </div>
+        <div class="sim-status" id="simStatus">Tekan "Bergerak" untuk mulakan simulasi.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: GAMBAR RUJUKAN ============ -->
+  <section id="rujukan">
+    <span class="sec-tag">SEKSYEN 4</span>
+    <h2>Gambar Rujukan</h2>
+    <p class="sec-desc">Tambah gambar tempat atau pergerakan ibadah sebagai rujukan peribadi. Gambar paparan semasa sahaja — tidak disimpan selepas halaman ditutup.</p>
+    <div class="add-form">
+      <h4>🖼️ Tambah Gambar</h4>
+      <div class="add-row">
+        <input type="text" id="galTitle" placeholder="Tajuk (cth: Laluan tawaf tingkat 1)">
+        <button class="btn btn-main" id="btnGalPick">Pilih Gambar</button>
+        <input type="file" id="galFileInput" accept="image/png,image/jpeg,image/gif,image/webp">
+      </div>
+      <input type="text" id="galNote" placeholder="Nota ringkas (cth: masuk dari pintu King Fahd, pusing kaunti kiri)" style="margin-top:.45rem">
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+</main>
+
+<footer>
+  ⚠️ Aplikasi contoh untuk pembelajaran sahaja. Semua maklumat adalah ringkasan asas — rujuk pihak Tabung Haji atau mutawwif untuk panduan rasmi.
+</footer>
+
+<script>
+/* ================================================================
+   SECTION 1 — Panduan Langkah
+================================================================ */
+const STEPS = [
+  {
+    title: "Ihram & Niat",
+    sub: "Titik Miqat",
+    body: "Pakai pakaian ihram (dua helai kain putih tanpa jahitan bagi lelaki) di Miqat, kemudian niatkan umrah atau haji. Lelaki dari Malaysia biasa berniat: \u201cLabbaikallahumma umrah\u201d. Selepas niat, elakkan perkara yang dilarang semasa ihram.",
+    latihan: "Contoh masa latihan: 10 minit sebelum tidur — latih lafaz niat dan cara melipat kain ihram."
+  },
+  {
+    title: "Tawaf — 7 pusingan Kaabah",
+    sub: "Masuk Masjidil Haram",
+    body: "Khitab Masjidil Haram, mulakan tawaf dari Hajar Aswad mengikut arah lawan jam (kaunti kiri), 7 pusingan penuh. Setiap pusingan bermula dan berakhir di Hajar Aswad.",
+    latihan: "Contoh masa latihan: 20 minit jalan kaki di rumah atau taman — bayangkan pusingan mengelilingi satu titik tengah."
+  },
+  {
+    title: "Saie — Safa ke Marwah",
+    sub: "7 perjalanan",
+    body: "Berjalan antara bukit Safa dan Marwah sebanyak 7 kali (satu perjalanan = satu hala). Lelaki berlari-lari kecil di antara tiang hijau. Bersolat sunat dua rakaat selepas tawaf sebelum saie.",
+    latihan: "Contoh masa latihan: 15–20 minit senaman jalan pantas 3 kali seminggu untuk biasakan jarak jauh."
+  },
+  {
+    title: "Wukuf di Arafah",
+    sub: "9 Zulhijjah",
+    body: "Wukuf adalah rukun haji paling utama — berada di tanah Arafah dari zuhur hingga maghrib pada 9 Zulhijjah. Manakalah waktu untuk berdoa, zikir dan merendah diri. Tidak wukuf, tidak sah haji.",
+    latihan: "Contoh masa latihan: 30 minit duduk tenang berzikir dan berdoa — latih kesabaran duduk lama tanpa telefon."
+  },
+  {
+    title: "Muzdalifah & Mabit",
+    sub: "Malam 10 Zulhijjah",
+    body: "Selepas wukuf, bergerak ke Muzdalifah, solat maghrib dan isyak secara gabungan, kemudian bermalam dan mengutip batu kecil (sekitar 49 hingga 70 biji) untuk melontar esok.",
+    latihan: "Contoh masa latihan: 10 minit — latih cara mengutip dan membawa batu sebesar biji kacang dengan tangan kiri."
+  },
+  {
+    title: "Melontar Jamrah",
+    sub: "Mina, 10–13 Zulhijjah",
+    body: "Di Mina, lontar batu ke Jamrah Aqabah pada 10 Zulhijjah (7 kali), kemudian Jamrah Pertama, Pertengahan dan Aqabah pada hari-hari Tasyriq (masing-masing 7 kali). Setiap lontar dengan takbir.",
+    latihan: "Contoh masa latihan: 10 minit — latih lontar batu ke sasaran jarak 2–3 meter di laman rumah."
+  },
+  {
+    title: "Tahallul & Tawaf Wadaa",
+    sub: "Penutup ibadah",
+    body: "Cukur atau pendekkan rambut (tahallul) untuk keluar dari ihram, kemudian lakukan Tawaf Wadaa sebagai tanda selamat tinggal sebelum meninggalkan Makkah. Bagi haji, susuli dengan Qurban dan Tawaf Ziarah.",
+    latihan: "Contoh masa latihan: 5 minit — ulangkaji susunan langkah terakhir menggunakan kad ringkasan."
+  }
+];
+
+const stepsList = document.getElementById('stepsList');
+const stepDetail = document.getElementById('stepDetail');
+const detailTitle = document.getElementById('detailTitle');
+const detailBody = document.getElementById('detailBody');
+const detailLatihan = document.getElementById('detailLatihan');
+
+STEPS.forEach((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'step';
+  el.innerHTML = `<div class="step-num">${i + 1}</div>
+    <div><div class="step-title">${s.title}</div><div class="step-sub">${s.sub}</div></div>`;
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.step').forEach(x => x.classList.remove('active'));
+    el.classList.add('active');
+    detailTitle.textContent = s.title;
+    detailBody.textContent = s.body;
+    detailLatihan.textContent = '💪 ' + s.latihan;
+    stepDetail.classList.add('show');
+    stepDetail.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  });
+  stepsList.appendChild(el);
+});
+
+/* ================================================================
+   SECTION 2 — Doa & Checklist
+================================================================ */
+const DOAS = [
+  {
+    nama: "Doa Niat Umrah",
+    arab: "لَبَّيْكَ اللَّهُمَّ عُمْرَةً",
+    maksud: "Aku memenuhi seruan-Mu ya Allah, untuk umrah."
+  },
+  {
+    nama: "Doa Ketika Wukuf di Arafah",
+    arab: "لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+    maksud: "Tiada tuhan selain Allah semata-mata, tiada sekutu bagi-Nya."
+  },
+  {
+    nama: "Doa Melontar Jamrah",
+    arab: "اللَّهُ أَكْبَرُ",
+    maksud: "Allah Maha Besar — diucapkan setiap kali batu dilontar."
+  },
+  {
+    nama: "Doa Selamat Perjalanan",
+    arab: "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هٰذَا",
+    maksud: "Maha Suci Yang telah menundukkan untuk kami ini (kenderaan)."
+  }
+];
+
+const doaList = document.getElementById('doaList');
+const doaBox = document.getElementById('doaBox');
+let selectedDoa = 0;
+
+function showDoa(i) {
+  const d = DOAS[i];
+  doaBox.innerHTML = `<div class="arab">${d.arab}</div>
+    <div><strong>${d.nama}</strong></div>
+    <div class="maksud">Maksud: ${d.maksud}</div>`;
+  renderAttach(i);
+}
+
+function renderAttach(i) {
+  const d = DOAS[i];
+  document.getElementById('attachTarget').textContent = `Doa dipilih: ${d.nama}`;
+  const area = document.getElementById('attachPreviewArea');
+  if (d.file) {
+    area.innerHTML = `<div class="attached-preview">
+      ${d.file.isPdf
+        ? `<iframe src="${d.file.dataUrl}" title="${d.file.name}"></iframe>
+           <div class="pdf-fallback">PDF: <strong>${d.file.name}</strong> — jika paparan kosong, muat turun fail untuk buka.</div>`
+        : `<img src="${d.file.dataUrl}" alt="${d.file.name}">`}
+    </div>
+    <div class="doa-attach" style="margin-top:.4rem">
+      <span class="attach-file">📎 ${d.file.name}</span>
+      <button class="attach-remove" id="btnRemoveAttach">Buang fail</button>
+    </div>`;
+    document.getElementById('btnRemoveAttach').addEventListener('click', () => {
+      delete DOAS[i].file;
+      renderAttach(i);
+    });
+  } else {
+    area.innerHTML = '<p style="font-size:.78rem;color:var(--muted)">Tiada fail dilampirkan untuk doa ini.</p>';
+  }
+}
+
+function renderDoa(activeIdx) {
+  selectedDoa = activeIdx;
+  doaList.innerHTML = '';
+  DOAS.forEach((d, i) => {
+    const el = document.createElement('div');
+    el.className = 'doa-item' + (i === activeIdx ? ' active' : '');
+    el.textContent = (d.file ? '📎 ' : '') + d.nama;
+    el.addEventListener('click', () => {
+      renderDoa(i);
+      showDoa(i);
+    });
+    doaList.appendChild(el);
+  });
+}
+
+const doaFileInput = document.getElementById('doaFileInput');
+document.getElementById('btnAttachDoa').addEventListener('click', () => doaFileInput.click());
+doaFileInput.addEventListener('change', () => {
+  const f = doaFileInput.files[0];
+  if (!f) return;
+  const isPdf = f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+  const isPng = f.type === 'image/png' || f.name.toLowerCase().endsWith('.png');
+  if (!isPdf && !isPng) {
+    alert('Sila pilih fail PDF atau PNG sahaja.');
+    doaFileInput.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    DOAS[selectedDoa].file = { name: f.name, dataUrl: reader.result, isPdf };
+    renderDoa(selectedDoa);
+    renderAttach(selectedDoa);
+  };
+  reader.readAsDataURL(f);
+  doaFileInput.value = '';
+});
+
+renderDoa(0);
+showDoa(0);
+
+document.getElementById('btnAddDoa').addEventListener('click', () => {
+  const nama = document.getElementById('doaNama').value.trim();
+  if (!nama) return;
+  DOAS.push({
+    nama: nama,
+    arab: document.getElementById('doaArab').value.trim() || '—',
+    maksud: document.getElementById('doaMaksud').value.trim() || 'Tiada maksud diberi.'
+  });
+  document.getElementById('doaNama').value = '';
+  document.getElementById('doaArab').value = '';
+  document.getElementById('doaMaksud').value = '';
+  renderDoa(DOAS.length - 1);
+  showDoa(DOAS.length - 1);
+});
+
+const CHECKLIST = [
+  {item: "Pasport & dokumen travel (visum, tiket)", done: true},
+  {item: "Pakaian ihram (dua helai kain & pin lelaki)", done: true},
+  {item: "Kasut slip-on & sandal selesa", done: false},
+  {item: "Tuala kecil & bekas air (botol zamzam)", done: false},
+  {item: "Ubat peribadi & plakster/painkiller", done: false},
+  {item: "Tasbih digital & buku doa poket", done: false}
+];
+
+const checkList = document.getElementById('checkList');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+
+function renderChecklist() {
+  checkList.innerHTML = '';
+  CHECKLIST.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'check-item' + (c.done ? ' done' : '');
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:.6rem;flex:1;cursor:pointer;';
+    row.innerHTML = `<input type="checkbox" ${c.done ? 'checked' : ''}>
+      <span class="check-name">${c.item}</span>
+      <span class="check-status">${c.done ? '✔ SIAP' : 'BELUM'}</span>`;
+    row.querySelector('input').addEventListener('change', (e) => {
+      c.done = e.target.checked;
+      renderChecklist();
+    });
+    row.addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      c.done = !c.done;
+      renderChecklist();
+    });
+    el.appendChild(row);
+
+    const actions = document.createElement('div');
+    actions.className = 'item-actions';
+    const editBtn = document.createElement('button');
+    editBtn.className = 'icon-btn';
+    editBtn.title = 'Edit barang';
+    editBtn.textContent = '✏️';
+    editBtn.addEventListener('click', () => startEditItem(i, el));
+    const delBtn = document.createElement('button');
+    delBtn.className = 'icon-btn';
+    delBtn.title = 'Buang barang';
+    delBtn.textContent = '🗑️';
+    delBtn.addEventListener('click', () => {
+      CHECKLIST.splice(i, 1);
+      renderChecklist();
+    });
+    actions.appendChild(editBtn);
+    actions.appendChild(delBtn);
+    el.appendChild(actions);
+    checkList.appendChild(el);
+  });
+  const n = CHECKLIST.filter(c => c.done).length;
+  progressFill.style.width = (CHECKLIST.length ? n / CHECKLIST.length * 100 : 0) + '%';
+  progressLabel.textContent = `${n} / ${CHECKLIST.length} siap`;
+}
+
+function startEditItem(i, el) {
+  const row = el.querySelector('div');
+  const span = row.querySelector('.check-name');
+  const input = document.createElement('input');
+  input.className = 'edit-input';
+  input.value = CHECKLIST[i].item;
+  span.replaceWith(input);
+  input.focus();
+  const commit = () => {
+    const v = input.value.trim();
+    if (v) CHECKLIST[i].item = v;
+    renderChecklist();
+  };
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') commit();
+    if (e.key === 'Escape') renderChecklist();
+  });
+  input.addEventListener('blur', commit);
+}
+
+document.getElementById('btnAddItem').addEventListener('click', () => {
+  const inp = document.getElementById('newItemName');
+  const v = inp.value.trim();
+  if (!v) return;
+  CHECKLIST.push({ item: v, done: false });
+  inp.value = '';
+  renderChecklist();
+});
+document.getElementById('newItemName').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') document.getElementById('btnAddItem').click();
+});
+renderChecklist();
+
+/* ================================================================
+   SECTION 3 — Simulasi Practice
+================================================================ */
+const simStage = document.getElementById('simStage');
+const simTitle = document.getElementById('simTitle');
+const simDesc = document.getElementById('simDesc');
+const btnMove = document.getElementById('btnMove');
+const btnReset = document.getElementById('btnReset');
+const simStatus = document.getElementById('simStatus');
+
+const SIMS = {
+  tawaf: {
+    title: "Tawaf — 7 Pusingan Kaabah",
+    desc: "Mulai dari Hajar Aswad, pusing kaunti kiri mengelilingi Kaabah sebanyak 7 pusingan.",
+    shape: "circle",
+    points: makeCirclePoints(105, 7)
+  },
+  saie: {
+    title: "Saie — Safa ⟷ Marwah",
+    desc: "Berjalan ulang-alik antara Safa dan Marwah. 7 perjalanan berakhir di Marwah.",
+    shape: "straight",
+    points: makeStraightPoints(7)
+  },
+  wukuf: {
+    title: "Wukuf di Arafah",
+    desc: "Duduk tenang di tanah Arafah dari zuhur hingga maghrib — masa berdoa dan zikir.",
+    shape: "wukuf",
+    points: makeWukufPoints(6)
+  },
+  jamrah: {
+    title: "Melontar Jamrah",
+    desc: "Lontar 7 batu ke setiap jamrah: Aqabah, kemudian Jamrah Pertama, Pertengahan dan Aqabah.",
+    shape: "jamrah",
+    points: makeJamrahPoints(12)
+  }
+};
+
+function makeCirclePoints(count, laps) {
+  const pts = [];
+  for (let i = 1; i <= count; i++) {
+    const frac = i / count;
+    const ang = frac * 2 * Math.PI * laps;
+    pts.push({
+      x: 140 + 102 * Math.sin(ang),
+      y: 140 - 102 * Math.cos(ang),
+      label: `Pusingan ${Math.floor(frac * laps) + 1}/7 — teruskan mengelilingi Kaabah`
+    });
+  }
+  return pts;
+}
+
+function makeStraightPoints(count) {
+  const pts = [];
+  for (let i = 1; i <= count; i++) {
+    const toMarwah = i % 2 === 0;
+    pts.push({
+      x: toMarwah ? 235 : 45,
+      y: 140,
+      label: `Perjalanan ${i}/7 — ${toMarwah ? 'tiba di Marwah 🟢' : 'tiba di Safa 🟢'}`
+    });
+  }
+  return pts;
+}
+
+function makeWukufPoints(count) {
+  const phases = ["Tiba di Arafah 🕌", "Zuhur — solat & rehat", "Asar — zikir & doa",
+                  "Petang — doa paling mustajab", "Menjelang maghrib", "Maghrib — bersiap ke Muzdalifah"];
+  const pts = [];
+  for (let i = 0; i < count; i++) {
+    pts.push({x: 40 + i * 40, y: 140, label: phases[i]});
+  }
+  return pts;
+}
+
+function makeJamrahPoints(count) {
+  const jamrahNames = ["Jamrah Aqabah", "Jamrah Pertama", "Jamrah Pertengahan", "Jamrah Aqabah"];
+  const pts = [];
+  for (let i = 0; i < count; i++) {
+    const j = Math.floor(i / 3) % 4;
+    pts.push({
+      x: 40 + (i % 3) * 100,
+      y: 50 + Math.floor(i / 3) * 60,
+      label: `Lontar ${i + 1} — ${jamrahNames[j]} (7 kali setiap jamrah)`
+    });
+  }
+  return pts;
+}
+
+function drawStage(key) {
+  const s = SIMS[key];
+  simStage.innerHTML = '';
+  simTitle.textContent = s.title;
+  simDesc.textContent = s.desc;
+
+  if (key === 'tawaf') {
+    const ka = document.createElement('div');
+    ka.className = 'kaabah';
+    ka.textContent = '🕋';
+    simStage.appendChild(ka);
+    const line = document.createElement('div');
+    line.className = 'path-line path-circle';
+    line.style.cssText = 'width:204px;height:204px;top:38px;left:38px;';
+    simStage.appendChild(line);
+  } else if (key === 'saie') {
+    const line = document.createElement('div');
+    line.className = 'path-line path-straight';
+    line.style.cssText = 'width:190px;height:40px;top:120px;left:45px;';
+    simStage.appendChild(line);
+    const safa = mark('SAFA', 45); const marwah = mark('MARWAH', 235);
+    simStage.appendChild(safa); simStage.appendChild(marwah);
+  } else if (key === 'wukuf') {
+    const area = document.createElement('div');
+    area.className = 'wukuf-area';
+    area.textContent = 'TANAH ARAFAH';
+    simStage.appendChild(area);
+  } else if (key === 'jamrah') {
+    [[40, 50, '1'], [140, 50, '2'], [240, 50, '3'], [40, 110, '1'], [140, 110, '2'], [240, 110, '3'],
+     [40, 170, '1'], [140, 170, '2'], [240, 170, '3']].forEach(([x, y, n]) => {
+      const j = document.createElement('div');
+      j.className = 'jamrah';
+      j.style.left = (x - 11) + 'px';
+      j.style.top = (y - 11) + 'px';
+      j.textContent = n;
+      simStage.appendChild(j);
+    });
+  }
+
+  const dot = document.createElement('div');
+  dot.className = 'user-dot';
+  dot.textContent = '🧕';
+  dot.id = 'userDot';
+  simStage.appendChild(dot);
+}
+
+function mark(text, x) {
+  const m = document.createElement('div');
+  m.textContent = text;
+  m.style.cssText = `position:absolute;left:${x - 30}px;top:170px;width:60px;text-align:center;
+    font-size:.65rem;font-weight:700;color:var(--accent);`;
+  return m;
+}
+
+let simKey = 'tawaf';
+let simIdx = 0;
+let moving = false;
+
+function resetSim() {
+  simIdx = 0;
+  moving = false;
+  btnMove.disabled = false;
+  btnMove.textContent = 'Bergerak ▶';
+  const dot = document.getElementById('userDot');
+  if (dot) { dot.style.left = '127px'; dot.style.top = '127px'; }
+  simStatus.textContent = 'Tekan "Bergerak" untuk mulakan simulasi.';
+}
+
+document.querySelectorAll('.sim-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    simKey = tab.dataset.sim;
+    drawStage(simKey);
+    resetSim();
+  });
+});
+
+btnMove.addEventListener('click', () => {
+  if (moving) return;
+  const pts = SIMS[simKey].points;
+  if (simIdx >= pts.length) {
+    simStatus.textContent = '✅ Simulasi tamat! Tekan "Set Semula" untuk latihan lagi.';
+    btnMove.disabled = true;
+    return;
+  }
+  moving = true;
+  const p = pts[simIdx];
+  const dot = document.getElementById('userDot');
+  dot.style.left = (p.x - 13) + 'px';
+  dot.style.top = (p.y - 13) + 'px';
+  simStatus.textContent = `Langkah ${simIdx + 1}/${pts.length}: ${p.label}`;
+  simIdx++;
+  setTimeout(() => { moving = false; }, 1000);
+  if (simIdx >= pts.length) {
+    setTimeout(() => {
+      simStatus.textContent = '✅ Simulasi tamat! Bagus — tekan "Set Semula" untuk latihan lagi.';
+      btnMove.disabled = true;
+    }, 1050);
+  }
+});
+
+btnReset.addEventListener('click', resetSim);
+
+/* Init */
+drawStage('tawaf');
+
+/* ================================================================
+   SECTION 4 — Gambar Rujukan (gallery, session-only)
+================================================================ */
+const GALLERY = [
+  {
+    title: "Laluan Saie Safa ⟷ Marwah",
+    note: "Contoh ilustrasi: 7 perjalanan, berakhir di Marwah.",
+    img: "data:image/svg+xml;utf8," + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260">
+        <rect width="360" height="260" fill="#eef4ef"/>
+        <rect x="40" y="110" width="280" height="40" rx="20" fill="#e8dcc8"/>
+        <circle cx="60" cy="130" r="16" fill="#4f8a6d"/>
+        <circle cx="300" cy="130" r="16" fill="#c9b48e"/>
+        <text x="60" y="180" text-anchor="middle" font-size="14" fill="#4f8a6d" font-weight="bold">SAFA</text>
+        <text x="300" y="180" text-anchor="middle" font-size="14" fill="#7a6a45" font-weight="bold">MARWAH</text>
+        <text x="180" y="135" text-anchor="middle" font-size="13" fill="#2e3d33">⟷ 7 perjalanan ⟷</text>
+      </svg>`)
+  },
+  {
+    title: "Kedudukan Jamrah di Mina",
+    note: "Contoh ilustrasi: Aqabah, Pertama & Pertengahan.",
+    img: "data:image/svg+xml;utf8," + encodeURIComponent(
+      `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="260">
+        <rect width="360" height="260" fill="#f4f1e8"/>
+        <circle cx="90" cy="80" r="22" fill="#8a9a8f"/>
+        <circle cx="180" cy="130" r="22" fill="#8a9a8f"/>
+        <circle cx="270" cy="180" r="22" fill="#8a9a8f"/>
+        <text x="90" y="40" text-anchor="middle" font-size="13" fill="#2e3d33">Jamrah Pertama</text>
+        <text x="180" y="95" text-anchor="middle" font-size="13" fill="#2e3d33">Pertengahan</text>
+        <text x="270" y="230" text-anchor="middle" font-size="13" fill="#2e3d33">Aqabah</text>
+      </svg>`)
+  }
+];
+
+const gallery = document.getElementById('gallery');
+const galFileInput = document.getElementById('galFileInput');
+
+function renderGallery() {
+  gallery.innerHTML = '';
+  if (!GALLERY.length) {
+    gallery.innerHTML = '<div class="gallery-empty">Belum ada gambar rujukan. Tambah satu di atas.</div>';
+    return;
+  }
+  GALLERY.forEach((g, i) => {
+    const el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.innerHTML = `<img src="${g.img}" alt="${g.title}">
+      <div class="gallery-cap"><strong>${g.title}</strong><span>${g.note || ''}</span></div>
+      <button class="gallery-del" title="Buang gambar">✕</button>`;
+    el.querySelector('.gallery-del').addEventListener('click', () => {
+      GALLERY.splice(i, 1);
+      renderGallery();
+    });
+    gallery.appendChild(el);
+  });
+}
+
+document.getElementById('btnGalPick').addEventListener('click', () => {
+  const t = document.getElementById('galTitle').value.trim();
+  if (!t) {
+    alert('Sila tulis tajuk gambar dahulu.');
+    return;
+  }
+  galFileInput.click();
+});
+
+galFileInput.addEventListener('change', () => {
+  const f = galFileInput.files[0];
+  if (!f) return;
+  if (!f.type.startsWith('image/')) {
+    alert('Sila pilih fail gambar (PNG / JPG).');
+    galFileInput.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    GALLERY.push({
+      title: document.getElementById('galTitle').value.trim(),
+      note: document.getElementById('galNote').value.trim(),
+      img: reader.result
+    });
+    document.getElementById('galTitle').value = '';
+    document.getElementById('galNote').value = '';
+    galFileInput.value = '';
+    renderGallery();
+    gallery.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+  reader.readAsDataURL(f);
+});
+
+renderGallery();
+</script>
+</body>
+</html>
